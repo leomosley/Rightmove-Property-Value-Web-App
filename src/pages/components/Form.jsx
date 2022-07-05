@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import firebase from "../utils/firebase";
 
 function Form() {
 
-    const links = [];
-    const linkRef = firebase.database().ref("link");
-    linkRef.on("value", (snapshot) => {
+    const linksRef = firebase.database().ref("link");
+    const navigate = useNavigate();
+    const urls = [];
+    
+    linksRef.on("value", (snapshot) => {
         const values = snapshot.val();
         for (let URL in values) {
-            links.push(values[URL].URL)
+            urls.push(values[URL].URL)
         }
     })
 
@@ -22,23 +25,32 @@ function Form() {
 
         const template = "https://www.rightmove.co.uk/property-for-sale/find.html?";
 
-        if (link.includes(template) == true && (link in links) == false) {
-            const content = {
+        if (link.includes(template) == true && (link in urls) == false) {
+            const data = {
                 URL: link,
-                data: {
-                    name,
-                    sold: [],
-                    forSale: [],
-                },
+                title: "",
+                scraped: false,
+                dateAdded: "",
+                data: [{
+                    URL: "",
+                    name: "",
+                    price: "",
+                    sqft: 0,
+                    bedrooms: 0,
+                    bathrooms: 0,
+                    description: "",
+                    dateAdded: "",
+                    showcaseImg: "",
+                }]
             };
-            linkRef.push(content);
-            document.getElementById("clear").value="";
+
+            linksRef.push(data);
+
+            navigate("/loaded");
         }
         
     };
 
-    
-    
     return (
         <div className="form">
             <h1>Scrape Values</h1>

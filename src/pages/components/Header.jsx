@@ -32,7 +32,7 @@ function Header() {
                     <Link className="nav-link" to="/loaded">Loaded Data</Link>
                 </li>
     			<li>
-                    <a className="nav-link" target="_blank" href="https://github.com/leomosley">Github</a>
+                    <a className="nav-link" target="_blank" href="https://github.com/leomosley/Rightmove-Property-Value-Web-App">Github</a>
                 </li>
                 <li className="hamburger-container">
                     <button className="hamburger" onClick={handleToggle}>
