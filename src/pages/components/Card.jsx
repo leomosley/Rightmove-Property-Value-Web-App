@@ -11,12 +11,10 @@ function Card({ load }) {
     return (
         <Link to={"./"+load[0].title}>
             <div className="list-item">
-                <div className="showcase">
-                </div>
                 <div className="info">
                     <h3>{load[0].title}</h3>
                     <hr></hr>
-                    <p>{(load[0].data).length}properties</p>
+                    <p>{(load[0].data).length} properties</p>
                     <p>Added on {load[0].dateAdded}</p>
                 </div>
             </div>

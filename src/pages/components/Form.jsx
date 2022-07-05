@@ -25,12 +25,18 @@ function Form() {
 
         const template = "https://www.rightmove.co.uk/property-for-sale/find.html?";
 
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+
         if (link.includes(template) == true && (link in urls) == false) {
             const data = {
                 URL: link,
                 title: "",
                 scraped: false,
-                dateAdded: "",
+                dateAdded: today,
                 data: [{
                     URL: "",
                     name: "",
